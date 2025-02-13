@@ -1,12 +1,12 @@
-import { Input } from '@/components//ui/input';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import React from 'react';
+import { Input } from "@/components//ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import React from "react";
 
 export function ContactPage() {
   return (
-    <div className="pt-12 pb-7 px-5">
-      <div className="mx-auto max-w-4xl text-center ">
+    <section className="pt-12 pb-7 px-5">
+      <div className="mx-auto max-w-4xl text-center">
         <p className="text-4xl font-bold text-gray-800 sm:text-5xl">
           Contact Us
         </p>
@@ -42,6 +42,6 @@ export function ContactPage() {
           </Button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }

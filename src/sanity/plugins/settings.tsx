@@ -18,10 +18,9 @@ export const singletonPlugin = (types: string[]) => {
       // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
       newDocumentOptions: (prev: any[], { creationContext }: any) => {
         if (creationContext.type === "global") {
-          return prev.filter(
-            (templateItem: { templateId: string }) =>
-              !types.includes(templateItem.templateId),
-          );
+          return prev.filter((templateItem: { templateId: string }) => {
+            return !types.includes(templateItem.templateId);
+          });
         }
 
         return prev;
@@ -78,10 +77,14 @@ export const pageStructure = (
     });
 
     // The default root list items (except custom ones)
-    const defaultListItems = S.documentTypeListItems().filter(
-      (listItem) =>
-        !typeDefArray.find((singleton) => singleton.name === listItem.getId()),
-    );
+    const defaultListItems = S.documentTypeListItems().filter((listItem) => {
+      console.log("LIST ITEM: ", listItem);
+      return !typeDefArray.find(
+        (singleton) =>
+          singleton.name === listItem.getId() ||
+          listItem.getId() === "media.tag",
+      );
+    });
 
     return S.list()
       .title("Content")

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import Image from 'next/image';
-import Link from 'next/link';
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
+import Link from "next/link";
 
-import { urlForImage } from '@/sanity/sanity.helpers';
+import { urlForImage } from "@/sanity/sanity.helpers";
 
 type Props = {
   src: SanityImageSource;
@@ -19,17 +19,19 @@ type Props = {
 export function SanityImage({
   src,
   linkSrc,
-  alt = '',
+  alt = "",
   className,
   width,
   height,
   clickable,
 }: Props) {
+  const imageUrl = urlForImage(src).url();
+
   return (
     <>
       {src && !clickable && (
         <Image
-          src={urlForImage(src).url()}
+          src={imageUrl}
           alt={alt}
           className={className}
           width={width}
@@ -38,7 +40,7 @@ export function SanityImage({
       )}
       {src && clickable && (
         <Link
-          href={linkSrc ? urlForImage(src).url() : '/#'}
+          href={linkSrc ? urlForImage(src).url() : "/#"}
           target="_blank"
           rel="noopener noreferrer"
         >

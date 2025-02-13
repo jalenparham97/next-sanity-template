@@ -1,6 +1,6 @@
-import { SanityImage } from '@/components/sanity-image';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { SanityImage } from "@/components/sanity-image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface HeroProps {
   title?: string;
@@ -23,12 +23,12 @@ export function Hero({ title, description, imageURL }: HeroProps) {
         </Link>
       </div>
       <div className="mt-16 flow-root sm:mt-24 mx-auto max-w-7xl">
-        <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+        <div className="-m-2 rounded-xl bg-[#F3F3F4] p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
           <SanityImage
             alt="App screenshot"
             width={2432}
             height={1442}
-            src={imageURL ?? ''}
+            src={imageURL ?? ""}
             className="rounded-xl shadow ring-1 ring-gray-900/10"
           />
         </div>

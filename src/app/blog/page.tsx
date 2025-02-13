@@ -1,14 +1,14 @@
-import { type Metadata } from 'next';
-import { draftMode } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { type Metadata } from "next";
+import { draftMode } from "next/headers";
+import { notFound } from "next/navigation";
 
-import { BlogPage } from '@/components/pages/blog/blog-page';
-import { BlogPagePreview } from '@/components/pages/blog/blog-page-preview';
-import { env } from '@/env';
-import { getClient } from '@/sanity/sanity.client';
-import { homePageQuery } from '@/sanity/sanity.queries';
-import { type HomePagePayload } from '@/types';
-import { defineMetadata } from '@/utils/metadata';
+import { BlogPage } from "@/components/pages/blog/blog-page";
+import { BlogPagePreview } from "@/components/pages/blog/blog-page-preview";
+import { env } from "@/env";
+import { getClient } from "@/sanity/sanity.client";
+import { blogPostsQuery, homePageQuery } from "@/sanity/sanity.queries";
+import { BlogPostPayload, type HomePagePayload } from "@/types";
+import { defineMetadata } from "@/utils/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const preview = (await draftMode()).isEnabled
@@ -31,14 +31,15 @@ export default async function HomePageRoute() {
 
   const client = getClient(preview);
   const data = await client.fetch<HomePagePayload | null>(homePageQuery);
+  const posts = await client.fetch<BlogPostPayload[] | null>(blogPostsQuery);
 
   // if (!data && !preview) {
   //   notFound();
   // }
 
   return preview ? (
-    <BlogPagePreview pageData={data} />
+    <BlogPagePreview pageData={data} postsData={posts} />
   ) : (
-    <BlogPage pageData={data} />
+    <BlogPage pageData={data} postsData={posts} />
   );
 }

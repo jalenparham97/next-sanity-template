@@ -1,31 +1,37 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
-// import { getImageDimensions } from "@sanity/asset-utils";
-// import Image from "next/image";
+import { getImageDimensions } from "@sanity/asset-utils";
+import Image from "next/image";
 import { type TypedObject } from "sanity";
 
-// import { urlForImage } from "@/sanity/sanity.helpers";
+import { urlForImage } from "@/sanity/sanity.helpers";
 
-// const PortableTextImageComponent = ({ value, isInline }) => {
-//   const { width, height } = getImageDimensions(value);
-//   return (
-//     <Image
-//       src={urlForImage(value).url()}
-//       alt={value.alt || ""}
-//       loading="lazy"
-//       width={width}
-//       height={height}
-//     />
-//   );
-// };
+const PortableTextImageComponent = ({
+  value,
+  isInline,
+}: {
+  value: any;
+  isInline: boolean;
+}) => {
+  const { width, height } = getImageDimensions(value);
+  return (
+    <Image
+      src={urlForImage(value).url()}
+      alt={value.alt || ""}
+      loading="lazy"
+      width={width}
+      height={height}
+    />
+  );
+};
 
 const portableTextComponents = {
-  // types: {
-  //   // image: PortableTextImageComponent,
-  //   // Any other custom types you have in your content
-  //   // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
-  // },
+  types: {
+    image: PortableTextImageComponent,
+    // Any other custom types you have in your content
+    // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
+  },
 };
 
 interface Props {

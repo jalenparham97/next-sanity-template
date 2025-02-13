@@ -1,16 +1,24 @@
-'use client';
+"use client";
 
-import { useLiveQuery } from 'next-sanity/preview';
+import { useLiveQuery } from "next-sanity/preview";
 
-import { homePageQuery } from '@/sanity/sanity.queries';
-import type { HomePagePayload } from '@/types';
+import { blogPostsQuery, homePageQuery } from "@/sanity/sanity.queries";
+import type { BlogPostPayload, HomePagePayload } from "@/types";
 
-import { BlogPage, type BlogPageProps } from './blog-page';
+import { BlogPage, type BlogPageProps } from "./blog-page";
 
-export function BlogPagePreview({ pageData: initialData }: BlogPageProps) {
+export function BlogPagePreview({
+  pageData: initialData,
+  postsData: initialPosts,
+}: BlogPageProps) {
   const [pageData] = useLiveQuery<HomePagePayload | null>(
     initialData,
-    homePageQuery
+    homePageQuery,
+  );
+
+  const [postsData] = useLiveQuery<BlogPostPayload[] | null>(
+    initialPosts,
+    blogPostsQuery,
   );
 
   if (!pageData) {
@@ -21,5 +29,5 @@ export function BlogPagePreview({ pageData: initialData }: BlogPageProps) {
     );
   }
 
-  return <BlogPage pageData={pageData} />;
+  return <BlogPage pageData={pageData} postsData={postsData} />;
 }

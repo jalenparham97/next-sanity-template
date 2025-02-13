@@ -2,6 +2,7 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/admin/[[...index]].tsx` route
  */
 
+import { codeInput } from "@sanity/code-input";
 import {
   dashboardTool,
   projectInfoWidget,
@@ -24,14 +25,22 @@ import {
   previewSecretId,
   projectId,
 } from "@/sanity/sanity.api";
+import { authorSchema } from "@/sanity/schemas/documents/author.schema";
+import { blogPostSchema } from "@/sanity/schemas/documents/blog-post.schema";
+import { categorySchema } from "@/sanity/schemas/documents/category.schema";
 import { aboutSchema } from "@/sanity/schemas/singletons/about.schema";
 import { homeSchema } from "@/sanity/schemas/singletons/home.schema";
 
-const schemas = [homeSchema, aboutSchema];
+const singletonSchemas = [homeSchema, aboutSchema];
+const documentSchemas = [blogPostSchema, authorSchema, categorySchema];
 
-const schemaNames: string[] = [homeSchema.name, aboutSchema.name];
+const singletonSchemaNames: string[] = [
+  homeSchema.name,
+  aboutSchema.name,
+  "media.tag",
+];
 
-export const PREVIEWABLE_DOCUMENT_TYPES = schemaNames;
+export const PREVIEWABLE_DOCUMENT_TYPES = singletonSchemaNames;
 
 export default defineConfig({
   basePath: "/admin",
@@ -40,11 +49,11 @@ export default defineConfig({
   title: env.NEXT_PUBLIC_SANITY_PROJECT_TITLE,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [...schemas],
+    types: [...singletonSchemas, ...documentSchemas],
   },
   plugins: [
     structureTool({
-      structure: pageStructure(schemas),
+      structure: pageStructure([...singletonSchemas]),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode({ apiVersion, previewSecretId }),
     }),
@@ -57,8 +66,10 @@ export default defineConfig({
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
+    // Code block plugin
+    codeInput(),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
-    singletonPlugin(schemaNames),
+    singletonPlugin(singletonSchemaNames),
     // Add the "Open preview" action
     productionUrl({
       apiVersion,

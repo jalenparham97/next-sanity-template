@@ -1,24 +1,23 @@
-'use client';
+"use client";
 
 import {
   Popover,
   PopoverBackdrop,
   PopoverButton,
-  PopoverOverlay,
   PopoverPanel,
-} from '@headlessui/react';
-import { AnimatePresence, motion } from 'motion/react';
-import Link from 'next/link';
+} from "@headlessui/react";
+import { AnimatePresence, motion } from "motion/react";
+import Link from "next/link";
 
-import { PreviewBanner } from '@/components/preview/preview-banner';
-import { Button } from '@/components/ui/button';
-import { Container } from '@/components/ui/container';
-import { usePathname } from 'next/navigation';
+import { PreviewBanner } from "@/components/preview/preview-banner";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  ['About', '/about'],
-  ['Blog', '/blog'],
-  ['Contact', '/contact'],
+  ["About", "/about"],
+  ["Blog", "/blog"],
+  ["Contact", "/contact"],
 ];
 
 function MenuIcon(props: any) {
@@ -57,8 +56,8 @@ function MobileNavLink({
   return (
     <PopoverButton
       as={Link}
-      href={'#'}
-      className="block text-base leading-7 tracking-tight text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg"
+      href={"#"}
+      className="block text-base font-medium leading-7 tracking-tight text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg"
       {...props}
     >
       {children}
@@ -73,7 +72,7 @@ interface HeaderProps {
 export function Header({ isPreview }: HeaderProps) {
   const pathname = usePathname();
 
-  if (pathname.includes('/admin')) {
+  if (pathname.includes("/admin")) {
     return null;
   }
 
@@ -93,7 +92,7 @@ export function Header({ isPreview }: HeaderProps) {
                 <Link
                   key={label}
                   href={href}
-                  className="relative -my-2 -mx-3 rounded-lg px-3 py-2 text-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100"
+                  className="relative -my-2 -mx-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                 >
                   <span className="relative z-10">{label}</span>
                 </Link>
@@ -147,12 +146,12 @@ export function Header({ isPreview }: HeaderProps) {
                             ))}
                           </div>
                           <div className="mt-8 flex flex-col gap-4">
-                            <Link href={'/'}>
+                            <Link href={"/"}>
                               <Button variant="outline" className="w-full">
                                 Log in
                               </Button>
                             </Link>
-                            <Link href={'/'}>
+                            <Link href={"/"}>
                               <Button className="w-full">
                                 Get started free
                               </Button>
@@ -166,12 +165,12 @@ export function Header({ isPreview }: HeaderProps) {
               )}
             </Popover>
             <div className="hidden lg:flex lg:items-center lg:space-x-4">
-              <Link href={'/'}>
+              <Link href={"/"}>
                 <Button variant="outline" className="">
                   Log in
                 </Button>
               </Link>
-              <Link href={'/'}>
+              <Link href={"/"}>
                 <Button className="">Get started free</Button>
               </Link>
             </div>

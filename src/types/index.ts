@@ -1,5 +1,5 @@
-import { type SanityImageSource } from '@sanity/image-url/lib/types/types';
-import type { TypedObject } from 'sanity';
+import { type SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { TypedObject } from "sanity";
 
 export type HomePagePayload = {
   seoTitle: string;
@@ -30,4 +30,47 @@ export type AboutPagePayload = {
     occupation: string;
     image: SanityImageSource;
   }[];
+};
+
+export type BlogPostPayload = {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  publishedAt: string;
+  featuredImage: SanityImageSource;
+  excerpt: string;
+  author: {
+    _key: string;
+  } & AuthorPayload;
+  categories: {
+    _key: string;
+    title: string;
+    slug: {
+      current: string;
+    };
+    description: string;
+  }[];
+  tags: string[];
+  content: TypedObject[];
+  seo: {
+    metaTitle: string;
+    metaDescription: string;
+    ogImage: SanityImageSource;
+  };
+  status: string;
+};
+
+export type CategoryPayload = {
+  _id: string;
+  title: string;
+  slug: string;
+  description: string;
+};
+
+export type AuthorPayload = {
+  _id: string;
+  name: string;
+  picture: SanityImageSource;
 };

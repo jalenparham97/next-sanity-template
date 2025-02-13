@@ -1,5 +1,5 @@
-import { Container } from '@/components/ui/container';
-import { HomePagePayload } from '@/types';
+import { Container } from "@/components/ui/container";
+import { HomePagePayload } from "@/types";
 
 interface FeaturesProps {
   pageData: HomePagePayload | null;
@@ -31,7 +31,7 @@ export function Features({ pageData }: FeaturesProps) {
           {page?.features?.map((feature) => (
             <li
               key={feature._key}
-              className="rounded-2xl border border-gray-200 p-6 shadow"
+              className="rounded-2xl border border-gray-200 p-6 shadow bg-white"
             >
               <h3 className="font-semibold text-lg">{feature.name}</h3>
               <p className="mt-2 text-gray-700 text-base font-light">
