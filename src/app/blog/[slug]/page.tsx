@@ -1,11 +1,11 @@
 import { SanityBlockRenderer } from "@/components/sanity-block-renderer";
 import { SanityImage } from "@/components/sanity-image";
-import { Button } from "@/components/ui/button";
+import { Badge } from '@/components/ui/badge';
 import { client } from "@/sanity/sanity.client";
 import { blogPostQuery } from "@/sanity/sanity.queries";
-import { sanityFetch } from "@/sanity/sanity.server";
 import { BlogPostPayload } from "@/types";
-import { IconArrowLeft } from "@tabler/icons-react";
+import { formatDate } from '@/utils/format-date';
+import Link from 'next/link';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -20,18 +20,18 @@ export default async function BlogPostPage({ params }: Props) {
     return null;
   }
 
+  console.log("post: ", post);
+  
   return (
     <section className="pt-4 pb-7 px-5">
       <div className="mx-auto max-w-3xl">
-        <div className="mx-auto mb-10">
-          <Button
-            leftIcon={<IconArrowLeft className="size-4" />}
-            size="sm"
-            variant="ghost"
-            href="/blog"
-          >
-            Back to blog
-          </Button>
+        <div className="mb-8 flex items-center gap-x-4">
+          <Link href={`/blog?category=${post.categories[0].slug.current}`}>
+            <Badge variant="default" className="py-2 px-4">
+              {post.categories[0].title}
+            </Badge>
+          </Link>
+          <p className="text-gray-500 text-sm">{formatDate(post.publishedAt)}</p>
         </div>
         <div className="mx-auto mb-10">
           <SanityImage

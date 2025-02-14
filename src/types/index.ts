@@ -65,7 +65,9 @@ export type BlogPostPayload = {
 export type CategoryPayload = {
   _id: string;
   title: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
   description: string;
 };
 

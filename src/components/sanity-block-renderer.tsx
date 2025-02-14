@@ -1,5 +1,6 @@
 "use client";
 
+import { CodeBlock } from "@/components/ui/code-block";
 import { PortableText } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import Image from "next/image";
@@ -31,6 +32,9 @@ const portableTextComponents = {
     image: PortableTextImageComponent,
     // Any other custom types you have in your content
     // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
+    code: ({ value }: any) => {
+      return <CodeBlock language={value.language} code={value.code} />;
+    }
   },
 };
 

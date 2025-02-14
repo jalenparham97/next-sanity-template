@@ -32,9 +32,9 @@ export default async function RootLayout({
     <>
       <html lang="en">
         <body className={`${inter.className} antialiased`}>
-          <div className="fixed left-0 top-0 -z-10 h-full w-full">
+          {/* <div className="fixed left-0 top-0 -z-10 h-full w-full">
             <div className="absolute inset-0 -z-10 h-screen w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]" />
-          </div>
+          </div> */}
           <Header isPreview={isPreview} />
           {children}
           <Footer />
