@@ -10,16 +10,16 @@ import { BlogPage, type BlogPageProps } from "./blog-page";
 export function BlogPagePreview({
   postsData: initialPosts,
   categoriesData: initialCategories,
+  searchParams,
 }: BlogPageProps) {
-
   const [postsData] = useLiveQuery<BlogPostPayload[] | null>(
     initialPosts,
-    blogPostsQuery
+    blogPostsQuery,
   );
 
   const [categoriesData] = useLiveQuery<CategoryPayload[] | null>(
     initialCategories,
-    categoriesQuery
+    categoriesQuery,
   );
 
   // if (!pageData) {
@@ -34,6 +34,7 @@ export function BlogPagePreview({
     <BlogPage
       postsData={postsData}
       categoriesData={categoriesData}
+      searchParams={searchParams}
     />
   );
 }
