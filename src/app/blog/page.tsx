@@ -38,10 +38,9 @@ export default async function BlogPageRoute() {
     : undefined;
 
   const client = getClient(preview);
-  const data = await client.fetch<HomePagePayload | null>(homePageQuery);
   const posts = await client.fetch<BlogPostPayload[] | null>(blogPostsQuery);
   const categories = await client.fetch<CategoryPayload[] | null>(
-    categoriesQuery
+    categoriesQuery,
   );
 
   // if (!data && !preview) {
@@ -49,10 +48,7 @@ export default async function BlogPageRoute() {
   // }
 
   return preview ? (
-    <BlogPagePreview
-      postsData={posts}
-      categoriesData={categories}
-    />
+    <BlogPagePreview postsData={posts} categoriesData={categories} />
   ) : (
     <BlogPage postsData={posts} categoriesData={categories} />
   );
