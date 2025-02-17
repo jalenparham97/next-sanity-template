@@ -1,6 +1,9 @@
 import { type SanityImageSource } from "@sanity/image-url/lib/types/types";
 import type { TypedObject } from "sanity";
 
+export type SearchParams = { [key: string]: string | string[] | undefined };
+export type AsyncSearchParams = Promise<SearchParams>;
+
 export type HomePagePayload = {
   seoTitle: string;
   seoDescription: string;

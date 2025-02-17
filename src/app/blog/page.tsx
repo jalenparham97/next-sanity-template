@@ -12,12 +12,16 @@ import {
   homePageQuery,
 } from "@/sanity/sanity.queries";
 import {
+  AsyncSearchParams,
   BlogPostPayload,
   CategoryPayload,
   type HomePagePayload,
 } from "@/types";
 import { defineMetadata } from "@/utils/metadata";
-import { Suspense } from "react";
+
+interface BlogPageProps {
+  searchParams: AsyncSearchParams;
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const preview = (await draftMode()).isEnabled
@@ -33,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function BlogPageRoute() {
+export default async function BlogPageRoute({ searchParams }: BlogPageProps) {
   const preview = (await draftMode()).isEnabled
     ? { token: env.SANITY_API_READ_TOKEN }
     : undefined;
@@ -44,17 +48,23 @@ export default async function BlogPageRoute() {
     categoriesQuery,
   );
 
+  const searchParamsData = await searchParams;
+
   // if (!data && !preview) {
   //   notFound();
   // }
 
   return preview ? (
-    <Suspense>
-      <BlogPagePreview postsData={posts} categoriesData={categories} />
-    </Suspense>
+    <BlogPagePreview
+      postsData={posts}
+      categoriesData={categories}
+      searchParams={searchParamsData}
+    />
   ) : (
-    <Suspense>
-      <BlogPage postsData={posts} categoriesData={categories} />
-    </Suspense>
+    <BlogPage
+      postsData={posts}
+      categoriesData={categories}
+      searchParams={searchParamsData}
+    />
   );
 }

@@ -2,21 +2,25 @@
 
 import { SanityImage } from "@/components/sanity-image";
 import { Tab } from "@/components/ui/tab";
-import { BlogPostPayload, CategoryPayload } from "@/types";
+import { BlogPostPayload, CategoryPayload, SearchParams } from "@/types";
 import { formatDate } from "@/utils/format-date";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export interface BlogPageProps {
   postsData: BlogPostPayload[] | null;
   categoriesData: CategoryPayload[] | null;
+  searchParams: SearchParams;
 }
 
-export function BlogPage({ postsData, categoriesData }: BlogPageProps) {
+export function BlogPage({
+  postsData,
+  categoriesData,
+  searchParams,
+}: BlogPageProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const currentCategory = searchParams.get("category");
+  const currentCategory = searchParams.category as string;
 
   // Default to an empty object to allow previews on non-existent documents
   const posts = postsData;
