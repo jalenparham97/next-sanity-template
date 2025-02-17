@@ -28,7 +28,7 @@ export function PreviewPane(
   const { document, previewSecretId, apiVersion } = props;
   const { displayed } = document;
   const documentType = displayed?._type;
-  const slug = (displayed?.slug as any)?.current;
+  const slug = (displayed?.slug as { current?: string })?.current;
 
   const href = resolveHref(documentType, displayed?.slug as string);
 

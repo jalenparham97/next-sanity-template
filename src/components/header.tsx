@@ -20,7 +20,7 @@ const navLinks = [
   ["Contact", "/contact"],
 ];
 
-function MenuIcon(props: any) {
+function MenuIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -33,7 +33,7 @@ function MenuIcon(props: any) {
   );
 }
 
-function ChevronUpIcon(props: any) {
+function ChevronUpIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -48,16 +48,19 @@ function ChevronUpIcon(props: any) {
 
 function MobileNavLink({
   children,
+  href,
+  className,
   ...props
 }: {
   children: React.ReactNode;
-  [x: string]: any;
+  href: string;
+  className?: string;
 }) {
   return (
     <PopoverButton
       as={Link}
-      href={"#"}
-      className="block text-base font-medium leading-7 tracking-tight text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg"
+      href={href}
+      className={`block text-base font-medium leading-7 tracking-tight text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg ${className}`}
       {...props}
     >
       {children}
@@ -88,7 +91,7 @@ export function Header({ isPreview }: HeaderProps) {
               </h2>
             </Link>
             <div className="hidden lg:flex lg:space-x-6">
-              {navLinks.map(([label, href], index) => (
+              {navLinks.map(([label, href]) => (
                 <Link
                   key={label}
                   href={href}

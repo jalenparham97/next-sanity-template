@@ -1,4 +1,4 @@
-import { defineQuery, groq } from "next-sanity";
+import { defineQuery } from "next-sanity";
 
 export const homePageQuery = defineQuery(`
   *[_type == "homePage"][0]{

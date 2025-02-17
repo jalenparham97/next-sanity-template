@@ -46,7 +46,7 @@ export default defineType({
               const milestoneNames =
                 hasItems &&
                 items
-                  .map((timeline: { title: any }) => timeline.title)
+                  .map((milestone: { title: string }) => milestone.title)
                   .join(", ");
 
               return {

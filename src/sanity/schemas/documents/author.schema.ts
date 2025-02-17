@@ -25,7 +25,10 @@ export const authorSchema = defineType({
           description: "Important for SEO and accessiblity.",
           validation: (rule) => {
             return rule.custom((alt, context) => {
-              if ((context.document?.picture as any)?.asset?._ref && !alt) {
+              const doc = context.document as {
+                picture?: { asset?: { _ref?: string } };
+              };
+              if (doc?.picture?.asset?._ref && !alt) {
                 return "Required";
               }
               return true;

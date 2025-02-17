@@ -16,7 +16,10 @@ export const singletonPlugin = (types: string[]) => {
     document: {
       // Hide 'Singletons (such as Home)' from new document options
       // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
-      newDocumentOptions: (prev: any[], { creationContext }: any) => {
+      newDocumentOptions: (
+        prev: { templateId: string; title: string }[],
+        { creationContext }: { creationContext: { type: string } },
+      ) => {
         if (creationContext.type === "global") {
           return prev.filter((templateItem: { templateId: string }) => {
             return !types.includes(templateItem.templateId);
@@ -26,7 +29,10 @@ export const singletonPlugin = (types: string[]) => {
         return prev;
       },
       // Removes the "duplicate" action on the Singletons (such as Home)
-      actions: (prev: any[], { schemaType }: any) => {
+      actions: (
+        prev: { action: string }[],
+        { schemaType }: { schemaType: string },
+      ) => {
         if (types.includes(schemaType)) {
           return prev.filter(({ action }) => action !== "duplicate");
         }
@@ -78,7 +84,6 @@ export const pageStructure = (
 
     // The default root list items (except custom ones)
     const defaultListItems = S.documentTypeListItems().filter((listItem) => {
-      console.log("LIST ITEM: ", listItem);
       return !typeDefArray.find(
         (singleton) =>
           singleton.name === listItem.getId() ||

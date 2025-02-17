@@ -1,20 +1,19 @@
 "use client";
 
 import { CodeBlock } from "@/components/ui/code-block";
+import { urlForImage } from "@/sanity/sanity.helpers";
 import { PortableText } from "@portabletext/react";
-import { getImageDimensions } from "@sanity/asset-utils";
+import { getImageDimensions, SanityImageAsset } from "@sanity/asset-utils";
 import Image from "next/image";
 import { type TypedObject } from "sanity";
 
-import { urlForImage } from "@/sanity/sanity.helpers";
+interface PortableTextImageProps {
+  value: SanityImageAsset & {
+    alt?: string;
+  };
+}
 
-const PortableTextImageComponent = ({
-  value,
-  isInline,
-}: {
-  value: any;
-  isInline: boolean;
-}) => {
+const PortableTextImageComponent = ({ value }: PortableTextImageProps) => {
   const { width, height } = getImageDimensions(value);
   return (
     <Image
@@ -32,9 +31,9 @@ const portableTextComponents = {
     image: PortableTextImageComponent,
     // Any other custom types you have in your content
     // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
-    code: ({ value }: any) => {
+    code: ({ value }: { value: { language: string; code: string } }) => {
       return <CodeBlock language={value.language} code={value.code} />;
-    }
+    },
   },
 };
 

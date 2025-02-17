@@ -1,6 +1,6 @@
 export function resolveHref(
   documentType?: string,
-  slug?: string,
+  _slug?: string,
 ): string | undefined {
   switch (documentType) {
     case "homePage":
