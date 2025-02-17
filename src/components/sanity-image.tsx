@@ -36,6 +36,7 @@ export function SanityImage({
           className={className}
           width={width}
           height={height}
+          unoptimized
         />
       )}
       {src && clickable && (
@@ -50,6 +51,7 @@ export function SanityImage({
             className={className}
             width={width}
             height={height}
+            unoptimized
           />
         </Link>
       )}

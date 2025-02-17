@@ -6,7 +6,7 @@ import { BlogPostPayload, CategoryPayload } from "@/types";
 import { formatDate } from "@/utils/format-date";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 export interface BlogPageProps {
   postsData: BlogPostPayload[] | null;
   categoriesData: CategoryPayload[] | null;
