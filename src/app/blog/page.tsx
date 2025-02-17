@@ -17,6 +17,7 @@ import {
   type HomePagePayload,
 } from "@/types";
 import { defineMetadata } from "@/utils/metadata";
+import { Suspense } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const preview = (await draftMode()).isEnabled
@@ -48,8 +49,12 @@ export default async function BlogPageRoute() {
   // }
 
   return preview ? (
-    <BlogPagePreview postsData={posts} categoriesData={categories} />
+    <Suspense>
+      <BlogPagePreview postsData={posts} categoriesData={categories} />
+    </Suspense>
   ) : (
-    <BlogPage postsData={posts} categoriesData={categories} />
+    <Suspense>
+      <BlogPage postsData={posts} categoriesData={categories} />
+    </Suspense>
   );
 }
