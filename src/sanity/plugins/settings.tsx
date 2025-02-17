@@ -2,7 +2,11 @@
  * This plugin contains all the logic for setting up the singletons
  */
 
-import { type DocumentDefinition } from "sanity";
+import {
+  type DocumentActionComponent,
+  type DocumentDefinition,
+  type TemplateItem,
+} from "sanity";
 import { type StructureResolver } from "sanity/structure";
 
 import { apiVersion, previewSecretId } from "@/sanity/sanity.api";
@@ -17,7 +21,7 @@ export const singletonPlugin = (types: string[]) => {
       // Hide 'Singletons (such as Home)' from new document options
       // https://user-images.githubusercontent.com/81981/195728798-e0c6cf7e-d442-4e58-af3a-8cd99d7fcc28.png
       newDocumentOptions: (
-        prev: { templateId: string; title: string }[],
+        prev: TemplateItem[],
         { creationContext }: { creationContext: { type: string } },
       ) => {
         if (creationContext.type === "global") {
@@ -30,7 +34,7 @@ export const singletonPlugin = (types: string[]) => {
       },
       // Removes the "duplicate" action on the Singletons (such as Home)
       actions: (
-        prev: { action: string }[],
+        prev: DocumentActionComponent[],
         { schemaType }: { schemaType: string },
       ) => {
         if (types.includes(schemaType)) {
